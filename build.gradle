@@ -57,7 +57,7 @@ dependencies {
 //	}
 
 	// Flashback
-	implementation ("maven.modrinth:4das1Fjq:${flashback_version}-fabric,26.2")
+	implementation ("maven.modrinth:4das1Fjq:cV1pa0YV")
 	include(implementation("com.moulberry:lattice:2.1.0"))
 }
 

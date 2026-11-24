@@ -4,8 +4,7 @@ import com.moulberry.flashback.editor.ui.ReplayUI;
 import com.moulberry.flashback.state.EditorState;
 import com.moulberry.flashback.state.EditorStateManager;
 import imgui.moulberry90.ImGui;
-import net.minecraft.client.Minecraft;
-import org.lwjgl.glfw.GLFW;
+import imgui.moulberry90.flag.ImGuiKey;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -22,8 +21,6 @@ public class ReplayUIRollMixin {
         }
 
         if (ReplayUI.isMovingCamera() || !ReplayUI.getIO().getWantCaptureKeyboard()) {
-            long window = Minecraft.getInstance().getWindow().handle();
-
             float rollSpeed = 1.0f; // Degrees per frame
 
             // Apply speed multiplier if holding 'Shift' (Flashback uses isMoveQuickDown)
@@ -31,11 +28,11 @@ public class ReplayUIRollMixin {
                 rollSpeed *= 2.0f;
             }
 
-            if (GLFW.glfwGetKey(window, GLFW.GLFW_KEY_Q) == GLFW.GLFW_PRESS) {
+            if (ImGui.isKeyDown(ImGuiKey.Q)) {
                 editorState.replayVisuals.overrideRollAmount -= rollSpeed;
                 ImGui.getIO().setWantCaptureKeyboard(true);
             }
-            if (GLFW.glfwGetKey(window, GLFW.GLFW_KEY_E) == GLFW.GLFW_PRESS) {
+            if (ImGui.isKeyDown(ImGuiKey.E)) {
                 editorState.replayVisuals.overrideRollAmount += rollSpeed;
                 ImGui.getIO().setWantCaptureKeyboard(true);
             }
